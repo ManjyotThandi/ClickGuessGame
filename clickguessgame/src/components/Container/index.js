@@ -11,7 +11,7 @@ class Logic extends Component {
     // Setting the component's initial state
     state = {
         characters: Characters,
-        idClicked: null,
+        idClicked: [],
         score: 0,
         highScore: 0
     };
@@ -20,6 +20,8 @@ class Logic extends Component {
     element = this.state.characters.map(chars => {
         return <Col key={chars.id}><Page key={chars.id} {...chars} handleClick={() => this.handleClick(chars.id)} /></Col>
     })
+
+    idsClicked = []
 
     //This will randomize your array
     arrayShuffle = function (arr) {
@@ -37,10 +39,12 @@ class Logic extends Component {
 
     handleClick = (id) => {
         // If the score is greater than the highscore, that is your new highscore
-        if (this.state.idClicked === id) {
+        //if (this.state.idClicked === id) {
+            var arraz = this.state.idClicked;
+            if(arraz.includes(id)){
             if (this.state.score > this.state.highScore) {
                 this.setState({
-                    idClicked: null,
+                    idClicked: [],
                     score: 0,
                     highScore: this.state.score
                 })
@@ -56,9 +60,10 @@ class Logic extends Component {
 
         }
         else {
+            this.idsClicked.push(id)
             this.setState({
                 characters: this.arrayShuffle(this.state.characters),
-                idClicked: id,
+                idClicked: this.idsClicked,
                 score: this.state.score + 1
             })
         }
@@ -73,7 +78,7 @@ class Logic extends Component {
                 <Title>CLICKY GAME</Title>
                 <Row>
                 {this.state.characters.map(chars => {
-                    return <Col xs="6" sm="4" key={chars.id}><Page key={chars.id} {...chars} handleClick={() => this.handleClick(chars.id)} /></Col>
+                    return <Col xs="6" sm="3" key={chars.id}><Page key={chars.id} {...chars} handleClick={() => this.handleClick(chars.id)} /></Col>
                 })}
                 </Row>
             </div>

@@ -5,7 +5,7 @@ import './styles.css'
 function NavBar(props) {
     return (
         <>
-            <Navbar className = "NavBar" sticky="top" bg="dark" variant="dark">
+            <Navbar collapseOnSelect className = "NavBar" sticky="top" bg="dark" variant="dark">
                 <Nav className="mr-auto">
                     <div className = "Text" >Clicking Game</div>
                     <div className = "Text" >Score: {props.score}</div>
